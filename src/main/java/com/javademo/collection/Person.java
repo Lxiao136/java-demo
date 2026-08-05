@@ -18,7 +18,7 @@ public class Person {
     }
 
 
-    //不重写 toString()的话，输出的是地址值
+    //不重写 toString()的话，输出该类对象时，输出的是地址值
     @Override
     public String toString() {
         return "Person{" + name +"," + age +"}";
