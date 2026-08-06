@@ -22,11 +22,12 @@ public class SetDemo {
             //输出与存放顺序不一致，但这并不是无序性
         }
 
+        //Person重写 equals()、hashCode() 后返回 true，不重写返回 false。因为比较的是对象地址
         System.out.println(hashSet.contains(new Person("Jarry", 18)));
         System.out.println();
 
 
-        //LinkHashSet()
+        //LinkedHashSet()
         Set linkedHashSet  = new LinkedHashSet();
 
         linkedHashSet.add("AA");
@@ -90,7 +91,7 @@ public class SetDemo {
         //TreeSet 的 定制排序
 
         //姓名从小到大，若相等则年龄从大到小
-        Comparator  comparable = new Comparator() {
+        Comparator comparator = new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 if(o1 instanceof User && o2 instanceof User){
@@ -107,9 +108,10 @@ public class SetDemo {
             }
         };
 
-        Set treeSet2 = new TreeSet(comparable);
+        Set treeSet2 = new TreeSet(comparator);
         for(Object u : treeSet1){
-            treeSet2.add(u);
+            treeSet2.add(u);//浅拷贝
+            //修改 treeSet1 里的对象，treeSet2里面的数据也跟着变
         }
 
         System.out.println("定制排序");
