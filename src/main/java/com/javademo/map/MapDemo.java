@@ -1,6 +1,7 @@
 package com.javademo.map;
 
 import com.javademo.collection.Person;
+import com.javademo.collection.User;
 
 import java.util.*;
 
@@ -40,6 +41,7 @@ import java.util.*;
 public class MapDemo {
     public static void main(String[] args) {
 
+        //HashMap
         Map map = new HashMap();
         Map mapCopy = new HashMap();
 
@@ -107,6 +109,48 @@ public class MapDemo {
             //System.out.println(iterator1.next());
             Map.Entry entry = (Map.Entry)iterator1.next();
             System.out.println(entry.getKey() + "---->" + entry.getValue());
+        }
+
+
+        System.out.println();
+
+        //TreeMap：两种排序和 TreeSet 相同
+
+        //定制排序
+        Comparator comparator = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(o1 instanceof User && o2 instanceof User){
+                    User u1 = (User) o1;
+                    User u2 = (User) o2;
+                    int value = u1.getName().compareTo(u2.getName());
+                    if(value != 0){
+                        return value;
+                    }
+                    return -(u1.getAge() - u2.getAge());
+
+                }
+                throw new RuntimeException("类型不符");
+            }
+        };
+
+        Map treeMap = new TreeMap(comparator);
+
+        User u1 = new User("Tom" , 13);
+        User u2 = new User("Jack" , 23);
+        User u3 = new User("Marry" , 33);
+        User u4 = new User("Frank" , 43);
+        User u5 = new User("Trump" , 23);
+
+        treeMap.put(u1 , 28);
+        treeMap.put(u2 , 18);
+        treeMap.put(u3 , 48);
+        treeMap.put(u4 , 38);
+        treeMap.put(u5 , "MAGA");
+
+        Set entry = treeMap.entrySet();
+        for(Object e : entry){
+            System.out.println(e);
         }
 
     }
