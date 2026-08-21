@@ -1,4 +1,4 @@
-package io;
+package com.javademo.io;
 
 import java.io.File;
 import java.io.FileReader;
